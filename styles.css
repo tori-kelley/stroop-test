@@ -1,0 +1,69 @@
+.hide {
+    display: none;
+}
+
+div {
+    display:flex;
+}
+
+p {
+    color: pink;
+}
+
+body {
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    font-family: sans-serif;
+    display: flex;
+    color: white;
+}
+
+.red {
+    color: #F00;
+}
+
+.orange {
+    color: #F80;
+}
+
+.yellow {
+    color: #FF0;
+}
+
+.green {
+    color: #0F0;
+}
+
+.blue {
+    color: #08F;
+}
+
+.purple {
+    color: #808;
+}
+
+#home {
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item {
+    color: white;
+    font-size: 5vh;
+    margin: 4vw;
+    text-decoration: none;
+}
+
+#directions {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2em;
+}
