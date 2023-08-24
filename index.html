@@ -23,11 +23,42 @@
     </div>
     </div>
 
+    <div id="recordsPage" class="hide">
+        <h1>Records:</h1>
+
+        <div>
+            <div class = "column">
+                <h2>Matched</h2>
+                <ul id="matchedList">
+                    <!-- to be filled from local storage -->
+                </ul>
+            </div>
+            <div class = "column">
+                <h2>Mixed</h2>
+                <ul id="mixedList">
+                    <!-- to be filled from local storage -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <div id="directions" class="hide">
         <h1>Directions:</h1>
         <h3>In a moment you will be given a series of words. Your task is to classify each word by the COLOR of the font, NOT the text content. You will do this by typing the corresponding first letter (i.e. "g" for green)</h3>
         <form id="username-form">
-            <div class="form-control">
+        <div class="form-control">
+            
+            <!-- base code for this switch taken from GeeksforGeeks
+            https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/ -->
+            <input type="checkbox"
+               id="switch"
+               class="checkbox" />
+            <label for ="switch"
+                class="toggle">
+                <pre>  mix   match</pre>
+            </label>
+
+            
               <input
                 type="text"
                 class="form-input"
@@ -44,6 +75,14 @@
 
     <div id="playing" class="hide">
         <h1 id="header"></h1>
+    </div>
+
+    <div id="finishPage" class="hide">
+        <img src="FINISH.png" alt="finish">
+        <h1 id="dispTime"></h1>
+        <button type="submit" class="btn" id="return">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Return
+        </button>
     </div>
 
     <script src="script.js"></script>
