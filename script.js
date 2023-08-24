@@ -1,13 +1,13 @@
 const homeScreen = document.querySelector("#home");
 const navRecord = document.querySelector(".nav-item:nth-child(2)");
 const navPlay = document.querySelector(".nav-item:nth-child(3)");
-const directions = document.querySelector("#directions");
+const directionsPage = document.querySelector("#directions");
 const usernameForm = document.querySelector("#username-form");
 const usernameInput = document.querySelector("#username-input");
 const playingPage = document.querySelector("#playing");
 const finishPage = document.querySelector("#finishPage");
 const recordsPage = document.querySelector("#recordsPage");
-const returnBtn = document.querySelector("#return");
+const returnBtns = document.getElementsByClassName("returnHome");
 const colors = ["red","orange", "yellow", "green", "blue", "purple"];
 const answerKey = {
     r: "red",
@@ -23,10 +23,13 @@ const header = document.querySelector("#header");
 const displayTime = document.querySelector("#dispTime");
 let startTime = null;
 let mixed = null;
+let mixedList = document.querySelector("#mixedList");
+let matchedList = document.querySelector("#matchedList");
+const pageList = [directionsPage, playingPage, finishPage, recordsPage];
 
 
 function giveDirections() {
-    directions.classList.remove("hide");
+    directionsPage.classList.remove("hide");
     homeScreen.classList.add("hide");
 }
 
@@ -34,7 +37,7 @@ function startNewGame(e) {
     e.preventDefault();
     mixed = document.querySelector("#switch").checked;
 
-    directions.classList.add("hide");
+    directionsPage.classList.add("hide");
     playingPage.classList.remove("hide");
     document.addEventListener("keydown", verifyKey);
     gamePlay();
@@ -94,8 +97,10 @@ function endGame() {
     displayTime.textContent = `Your time is ${totalTime} seconds! Noice.`;
 }
 
-function goHome(e) {
-    finishPage.classList.add("hide");
+function goHome() {
+    for (let page of pageList) {
+        page.classList.add("hide");
+    }
     homeScreen.classList.remove("hide");
 }
 
@@ -134,12 +139,24 @@ function showRecords() {
     homeScreen.classList.add("hide");
     recordsPage.classList.remove("hide");
     let recordsFromStorage = getRecordsFromStorage();
-    
+    mixedList.innerHTML = "";
+    matchedList.innerHTML = "";
+    addListEntries(recordsFromStorage["mixed"], mixedList);
+    addListEntries(recordsFromStorage["matched"], matchedList);
+}
 
+function addListEntries (arr, parent) {
+    for (let entry of arr) {
+        let li = document.createElement("li");
+        li.appendChild(document.createTextNode(`${entry.user}: ${entry.time}`))
+        parent.appendChild(li);
+    }
 }
 
 //Event Listeners 
 navPlay.addEventListener("click", giveDirections);
 navRecord.addEventListener("click", showRecords);
 usernameForm.addEventListener("submit", startNewGame);
-returnBtn.addEventListener("click", goHome);
+Array.from(returnBtns).forEach(function(returnBtn) {
+    returnBtn.addEventListener('click', goHome);
+  });
