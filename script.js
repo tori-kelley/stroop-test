@@ -35,6 +35,7 @@ function giveDirections() {
 
 function startNewGame(e) {
     e.preventDefault();
+    count = 0;
     mixed = document.querySelector("#switch").checked;
 
     directionsPage.classList.add("hide");
@@ -49,7 +50,7 @@ function gamePlay() {
 }
 
 function showNextHeader() {
-    if (count < 5) {
+    if (count < 25) {
         let index = Math.floor(Math.random() * 6);
         currentColor = colors[index];
         if (mixed) {
@@ -146,11 +147,23 @@ function showRecords() {
 }
 
 function addListEntries (arr, parent) {
-    for (let entry of arr) {
+    let sortedArr = sortArr(arr);
+    for (let entry of sortedArr) {
         let li = document.createElement("li");
         li.appendChild(document.createTextNode(`${entry.user}: ${entry.time}`))
         parent.appendChild(li);
     }
+}
+
+function sortArr(arr) {
+    let timesList = arr.map(obj => obj.time);
+    timesList.sort((a, b) => a - b);
+    let newArr = [];
+    for (time of timesList) {
+        let obj = arr.find(entry => entry.time === time);
+        newArr.push(obj);
+    }
+    return newArr;
 }
 
 //Event Listeners 
