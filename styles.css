@@ -12,8 +12,8 @@ div {
 
 body {
     background: black;
-    width: 100vw;
-    height: 100vh;
+    width: 98vw;
+    height: 99vh;
     font-family: sans-serif;
     display: flex;
     justify-content: center;
@@ -60,7 +60,7 @@ body {
     text-decoration: none;
 }
 
-#directions, #finishPage, #recordsPage {
+#directions, #finishPage, #recordsPage, #aboutPage {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -69,6 +69,7 @@ body {
 
 h3 {
     color: gray;
+    font-size: 1.25em;
 }
 
 h1 {
@@ -117,9 +118,27 @@ https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/
 
 .column {
     flex-direction: column;
-    margin: 10vw;
+    margin: 0 10vw 0 10vw;
+}
+
+.source {
+    margin: 1vh 0 3vh 0;
 }
 
 .username-entry {
     height: 8vh;
+}
+
+li {
+    list-style-type: none;
+}
+
+button {
+    color: white;
+    border-color: white;
+    background-color: black;
+}
+
+#blurb, form{
+    margin-bottom: 5vh;
 }

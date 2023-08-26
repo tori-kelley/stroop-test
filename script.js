@@ -1,6 +1,9 @@
 const homeScreen = document.querySelector("#home");
+const navAbout = document.querySelector("#nav").firstElementChild;
+console.log(navAbout);
 const navRecord = document.querySelector(".nav-item:nth-child(2)");
 const navPlay = document.querySelector(".nav-item:nth-child(3)");
+const aboutPage = document.querySelector("#aboutPage");
 const directionsPage = document.querySelector("#directions");
 const usernameForm = document.querySelector("#username-form");
 const usernameInput = document.querySelector("#username-input");
@@ -8,7 +11,7 @@ const playingPage = document.querySelector("#playing");
 const finishPage = document.querySelector("#finishPage");
 const recordsPage = document.querySelector("#recordsPage");
 const returnBtns = document.getElementsByClassName("returnHome");
-const colors = ["red","orange", "yellow", "green", "blue", "purple"];
+const colors = ["red", "purple", "blue", "green", "yellow", "orange"];
 const answerKey = {
     r: "red",
     o: "orange",
@@ -25,8 +28,13 @@ let startTime = null;
 let mixed = null;
 let mixedList = document.querySelector("#mixedList");
 let matchedList = document.querySelector("#matchedList");
-const pageList = [directionsPage, playingPage, finishPage, recordsPage];
+const pageList = [aboutPage, directionsPage, playingPage, finishPage, recordsPage];
+let colorCount = -1;
 
+function showAbout() {
+    aboutPage.classList.remove("hide");
+    homeScreen.classList.add("hide");
+}
 
 function giveDirections() {
     directionsPage.classList.remove("hide");
@@ -155,9 +163,15 @@ function addListEntries (arr, parent) {
     let sortedArr = sortArr(arr);
     for (let entry of sortedArr) {
         let li = document.createElement("li");
+        li.classList.add(getNextColor());
         li.appendChild(document.createTextNode(`${entry.user}: ${entry.time}`))
         parent.appendChild(li);
     }
+}
+
+function getNextColor() {
+    colorCount = (colorCount + 1) % 6;
+    return colors[colorCount];
 }
 
 function sortArr(arr) {
@@ -197,6 +211,7 @@ function removeRecordFromStorage(time, source) {
 }
 
 //Event Listeners 
+navAbout.addEventListener("click", showAbout);
 navPlay.addEventListener("click", giveDirections);
 navRecord.addEventListener("click", showRecords);
 usernameForm.addEventListener("submit", startNewGame);

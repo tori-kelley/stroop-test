@@ -11,7 +11,7 @@
     <div id="home">
     <img src="STROOP.png" alt="stroop">
     <div id="nav">
-        <a class="nav-item" href="https://en.wikipedia.org/wiki/Stroop_effect">
+        <a class="nav-item" href="#">
             About
         </a>
         <a class="nav-item" href="#">
@@ -23,18 +23,32 @@
     </div>
     </div>
 
+    <div id="aboutPage" class="hide">
+        <h1> What is the Stroop Test?</h1>
+        <h3> The Stroop effect is a psychological phenomenon where there's a delay in the reaction time of a task when the color of a word is incongruent with the word itself. In other words, it becomes harder to name the color of the ink a word is printed in when the word itself spells out a different color. This effect showcases the interference that occurs when automatic processes (reading the word) clash with controlled processes (naming the ink color). For example, if the word "BLUE" is written in red ink, individuals might take longer to say "red" compared to if the word was written in blue ink. This delay happens because reading the word "BLUE" is an automatic response that interferes with the controlled response of naming the ink color. The Stroop effect is often used in psychology to study attention, cognitive processing, and automatic versus controlled thinking.</h3>
+        <h2>Sources/ Additional information</h2>
+        <div id="sources" class = "column">
+            <a class="source" href="https://en.wikipedia.org/wiki/Stroop_effect">wikipedia.org</a>
+            <a class="source" href="https://www.simplypsychology.org/stroop-effect.html">simplypsychology.org</a>
+            <a class="source" href="https://www.sciencedirect.com/science/article/pii/S088761770300146X#:~:text=The%20Stroop%20Test%20has%20been,Stroop%20Color%20and%20Word%20Test.">sciencedirect.com/</a>
+        </div>
+        <button type="submit" class="btn returnHome">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Return
+        </button>
+    </div>
+
     <div id="recordsPage" class="hide">
         <h1>Records:</h1>
 
         <div>
             <div class = "column">
-                <h2>Matched</h2>
+                <h3>Matched</h3>
                 <ul id="matchedList">
                     <!-- to be filled from local storage -->
                 </ul>
             </div>
             <div class = "column">
-                <h2>Mixed</h2>
+                <h3>Mixed</h3>
                 <ul id="mixedList">
                     <!-- to be filled from local storage -->
                 </ul>
@@ -48,7 +62,7 @@
 
     <div id="directions" class="hide">
         <h1>Directions:</h1>
-        <h3>In a moment you will be given a series of words. Your task is to classify each word by the COLOR of the font, NOT the text content. You will do this by typing the corresponding first letter (i.e. "g" for green)</h3>
+        <h3 id="blurb">In a moment you will be given a series of words. Your task is to classify each word by the COLOR of the font, NOT the text content. You will do this by typing the corresponding first letter (i.e. "g" for green)</h3>
         <form id="username-form">
         <div class="form-control">
             
@@ -77,6 +91,11 @@
             </div>
         </div>
         </form>
+        <div>
+            <button type="submit" class="btn returnHome">
+                <i class="fa-solid fa-arrow-rotate-left"></i> Return
+            </button>
+        </div>
     </div>
 
     <div id="playing" class="hide">
