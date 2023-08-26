@@ -78,6 +78,7 @@ h1 {
 /* toggle and checkbox styles based on code from geeksforgeeks
 https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/  */
 .toggle {
+    margin-right: 5vw;
     position : relative ;
     display : inline-block;
     width : 100px;
@@ -117,4 +118,8 @@ https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/
 .column {
     flex-direction: column;
     margin: 10vw;
+}
+
+.username-entry {
+    height: 8vh;
 }

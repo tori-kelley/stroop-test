@@ -35,6 +35,11 @@ function giveDirections() {
 
 function startNewGame(e) {
     e.preventDefault();
+    if (usernameInput.value == "") {
+        alert("Please add a name, dude!");
+        return;
+    }
+    //reset count in case this isn't their first game
     count = 0;
     mixed = document.querySelector("#switch").checked;
 
@@ -166,10 +171,38 @@ function sortArr(arr) {
     return newArr;
 }
 
+function deleteRecord(record, source) {
+    let time = record.textContent.slice(record.textContent.indexOf(":")+2);
+    record.remove();
+    removeRecordFromStorage(time, source);
+}
+
+function deleteRecordWarning(e) {
+    let source = (e.currentTarget.id == "mixedList") ? "mixed" : "matched";
+    if (confirm("Are you sure you want to remove this entry?")) {
+        deleteRecord(e.target, source);
+    }
+}
+
+function removeRecordFromStorage(time, source) {
+    let recordsFromStorage = getRecordsFromStorage();
+    for (let obj of recordsFromStorage[source]) {
+        if (obj.time == time){
+            recordsFromStorage[source].splice(recordsFromStorage[source].indexOf(obj), 1);
+            break;
+        }
+    }
+
+    localStorage.setItem('records',JSON.stringify(recordsFromStorage));
+}
+
 //Event Listeners 
 navPlay.addEventListener("click", giveDirections);
 navRecord.addEventListener("click", showRecords);
 usernameForm.addEventListener("submit", startNewGame);
 Array.from(returnBtns).forEach(function(returnBtn) {
     returnBtn.addEventListener('click', goHome);
+  });
+Array.from([mixedList, matchedList]).forEach(function(list) {
+    list.addEventListener('dblclick', deleteRecordWarning);
   });
