@@ -20,7 +20,8 @@ const answerKey = {
     b: "blue",
     p: "purple"
 }
-let count = 0;
+let correctCount = 0;
+let wrongCount = 0;
 let currentColor = null;
 const header = document.querySelector("#header");
 const displayTime = document.querySelector("#dispTime");
@@ -48,7 +49,8 @@ function startNewGame(e) {
         return;
     }
     //reset count in case this isn't their first game
-    count = 0;
+    correctCount = 0;
+    wrongCount= 0;
     mixed = document.querySelector("#switch").checked;
 
     directionsPage.classList.add("hide");
@@ -63,7 +65,7 @@ function gamePlay() {
 }
 
 function showNextHeader() {
-    if (count < 25) {
+    if (correctCount < 25) {
         let index = Math.floor(Math.random() * 6);
         currentColor = colors[index];
         if (mixed) {
@@ -88,9 +90,10 @@ function verifyKey(e) {
     const pressedKey = e.key;
     if (currentColor) {
         if (answerKey.hasOwnProperty(pressedKey) && answerKey[pressedKey] === currentColor) {
-            count++;
+            correctCount++;
             console.log("Correct!");
         } else {
+            wrongCount++;
             console.log("Incorrect!");
         }
         let status = showNextHeader()
@@ -105,10 +108,11 @@ function endGame() {
     const username = usernameInput.value;
     const endTime = new Date();
     const totalTime = Math.abs(startTime - endTime)/1000;
+    const accuracy = Math.round(100*correctCount/(correctCount+ wrongCount));
     addRecordToStorage(totalTime, username);
     playingPage.classList.add("hide");
     finishPage.classList.remove("hide");
-    displayTime.textContent = `Your time is ${totalTime} seconds! Noice.`;
+    displayTime.textContent = `Your time is ${totalTime} seconds, and your answers were ${accuracy}% accurate! Noice.`;
 }
 
 function goHome() {
