@@ -21,6 +21,7 @@
             Play
         </a>
     </div>
+    <img class="nav-item" id="nav-psychedelic" src="PSYCHEDELIC.png" alt="PSYCHEDELIC" height = 30vh>
     </div>
 
     <div id="aboutPage" class="hide">
@@ -62,7 +63,17 @@
 
     <div id="directions" class="hide">
         <h1>Directions:</h1>
-        <h3 id="blurb">In a moment you will be given a series of words. Your task is to classify each word by the COLOR of the font, NOT the text content. You will do this by typing the corresponding first letter (i.e. "g" for green)</h3>
+        <div id="blurb">
+        <h3>In a moment you will be given a series of words. Your task is to classify each word by the COLOR of the font, NOT the text content. You will do this by typing the corresponding first letter (i.e. "g" for green)</h3>
+        <div id=psychedelic-directions class="hide"> 
+            <h3>Since this is PSYCHEDELIC mode, there will be an additional highlight color (not standard practice for the Stroop test) and your results won't be recorded. Good luck.</h3>
+            <div>
+                <button type="submit" class="btn play-btn">
+                    <i class="fa-solid fa-play"></i> Let's go!
+                </button>
+            </div>
+        </div>
+        </div>
         <form id="username-form">
         <div class="form-control">
             
@@ -85,7 +96,7 @@
                 placeholder="your name:"
                 autocomplete="name"
               />
-              <button type="submit" class="btn">
+              <button type="submit" class="btn play-btn">
                 <i class="fa-solid fa-play"></i> Let's go!
               </button>
             </div>
@@ -105,7 +116,7 @@
     <div id="finishPage" class="hide">
         <img src="FINISH.png" alt="finish">
         <h1 id="dispTime"></h1>
-        <button type="submit" class="btn returnHome" id="return">
+        <button type="submit" class="btn returnHome">
             <i class="fa-solid fa-arrow-rotate-left"></i> Return
         </button>
     </div>

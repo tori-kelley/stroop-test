@@ -6,10 +6,6 @@ div {
     display:flex;
 }
 
-/* p {
-    font-size: 0.9em;
-} */
-
 body {
     background: black;
     width: 98vw;
@@ -142,9 +138,45 @@ button {
 
 #blurb, form{
     margin-bottom: 5vh;
+    flex-direction: column;
 }
 
 ul {
     list-style: none;
     padding-left: 0;
-}​
+}
+
+.red-bg {
+    background-color: red;
+}
+
+.orange-bg {
+    background-color: #F80;
+}
+
+.yellow-bg {
+    background-color: #FF0;
+}
+
+.green-bg {
+    background-color: #0F0;
+}
+
+.blue-bg {
+    background-color: #08F;
+}
+
+.purple-bg {
+    background-color: #808;
+}
+
+header {
+    height: 20vh;
+    width: 40vh;
+}
+
+#psychedelic-directions {
+    flex-direction: column;
+    align-items: center;
+}
+

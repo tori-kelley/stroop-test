@@ -3,13 +3,17 @@ const navAbout = document.querySelector("#nav").firstElementChild;
 console.log(navAbout);
 const navRecord = document.querySelector(".nav-item:nth-child(2)");
 const navPlay = document.querySelector(".nav-item:nth-child(3)");
+const navPsychedelic = document.querySelector("#nav-psychedelic");
 const aboutPage = document.querySelector("#aboutPage");
 const directionsPage = document.querySelector("#directions");
+const psychedelicDirections = document.querySelector("#psychedelic-directions")
 const usernameForm = document.querySelector("#username-form");
 const usernameInput = document.querySelector("#username-input");
+const form = document.querySelector(".form-control");
 const playingPage = document.querySelector("#playing");
 const finishPage = document.querySelector("#finishPage");
 const recordsPage = document.querySelector("#recordsPage");
+const playBtns = document.getElementsByClassName("play-btn");
 const returnBtns = document.getElementsByClassName("returnHome");
 const colors = ["red", "purple", "blue", "green", "yellow", "orange"];
 const answerKey = {
@@ -27,10 +31,13 @@ const header = document.querySelector("#header");
 const displayTime = document.querySelector("#dispTime");
 let startTime = null;
 let mixed = null;
+let psychedelic = null;
 let mixedList = document.querySelector("#mixedList");
 let matchedList = document.querySelector("#matchedList");
 const pageList = [aboutPage, directionsPage, playingPage, finishPage, recordsPage];
 let colorCount = -1;
+
+console.log(navPsychedelic);
 
 function showAbout() {
     aboutPage.classList.remove("hide");
@@ -40,11 +47,14 @@ function showAbout() {
 function giveDirections() {
     directionsPage.classList.remove("hide");
     homeScreen.classList.add("hide");
+    if (psychedelic) {
+        psychedelicDirections.classList.remove("hide");
+        form.classList.add("hide");
+    }
 }
 
-function startNewGame(e) {
-    e.preventDefault();
-    if (usernameInput.value == "") {
+function startNewGame() {
+    if (usernameInput.value == "" && !psychedelic) {
         alert("Please add a name, dude!");
         return;
     }
@@ -64,17 +74,29 @@ function gamePlay() {
     showNextHeader();
 }
 
+//refactor this
 function showNextHeader() {
     if (correctCount < 25) {
         let index = Math.floor(Math.random() * 6);
         currentColor = colors[index];
-        if (mixed) {
+        if (psychedelic) {
+            let colorExcludedArr = colors.slice(0,index).concat(colors.slice(index+1));
+            let secondIndex = Math.floor(Math.random() * 5);
+            let newColor = colorExcludedArr[secondIndex];
+            let bothColorsExcludedArr = colorExcludedArr.slice(0,secondIndex).concat(colorExcludedArr.slice(secondIndex+1));
+            let thirdIndex = Math.floor(Math.random() * 4);
+            let thirdColor = bothColorsExcludedArr[thirdIndex];
+            header.textContent = newColor;
+            header.classList = (currentColor+ " " + thirdColor + "-bg");
+            console.log(currentColor+ " " + thirdColor + "-bg");
+        }
+        else if (mixed) {
             let colorExcludedArr = colors.slice(0,index).concat(colors.slice(index+1));
             let newColor = colorExcludedArr[Math.floor(Math.random() * 5)];
             header.textContent = newColor;
             header.classList = currentColor;
         }
-        else {
+        else{
             header.textContent = currentColor;
             header.classList = currentColor;
         }
@@ -109,7 +131,9 @@ function endGame() {
     const endTime = new Date();
     const totalTime = Math.abs(startTime - endTime)/1000;
     const accuracy = Math.round(100*correctCount/(correctCount+ wrongCount));
-    addRecordToStorage(totalTime, username, accuracy);
+    if (!psychedelic) {
+        addRecordToStorage(totalTime, username, accuracy);
+    }
     playingPage.classList.add("hide");
     finishPage.classList.remove("hide");
     displayTime.textContent = `Your time is ${totalTime} seconds, and your answers were ${accuracy}% accurate! Noice.`;
@@ -118,6 +142,11 @@ function endGame() {
 function goHome() {
     for (let page of pageList) {
         page.classList.add("hide");
+    }
+    if (psychedelic) {
+        psychedelic = null;
+        psychedelicDirections.classList.add("hide");
+        form.classList.remove("hide");
     }
     homeScreen.classList.remove("hide");
 }
@@ -191,7 +220,7 @@ function sortArr(arr) {
 }
 
 function deleteRecord(record, source) {
-    let time = record.textContent.slice(record.textContent.indexOf(":") + 2, indexOf("with") - 1);
+    let time = record.textContent.slice(record.textContent.indexOf(":") + 2, record.textContent.indexOf("with") - 1);
     record.remove();
     removeRecordFromStorage(time, source);
 }
@@ -215,13 +244,21 @@ function removeRecordFromStorage(time, source) {
     localStorage.setItem('records',JSON.stringify(recordsFromStorage));
 }
 
+function startPsychedelic() {
+    psychedelic = true;
+    giveDirections();
+}
+
 //Event Listeners 
 navAbout.addEventListener("click", showAbout);
 navPlay.addEventListener("click", giveDirections);
 navRecord.addEventListener("click", showRecords);
-usernameForm.addEventListener("submit", startNewGame);
+navPsychedelic.addEventListener("click", startPsychedelic);
 Array.from(returnBtns).forEach(function(returnBtn) {
     returnBtn.addEventListener('click', goHome);
+  });
+Array.from(playBtns).forEach(function(playBtn) {
+    playBtn.addEventListener('click', startNewGame);
   });
 Array.from([mixedList, matchedList]).forEach(function(list) {
     list.addEventListener('dblclick', deleteRecordWarning);
