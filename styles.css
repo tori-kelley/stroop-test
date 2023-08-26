@@ -118,7 +118,7 @@ https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/
 
 .column {
     flex-direction: column;
-    margin: 0 10vw 0 10vw;
+    margin: 0 4vw 0 4vw;
 }
 
 .source {
@@ -131,6 +131,7 @@ https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/
 
 li {
     list-style-type: none;
+    margin-bottom: 1vh;
 }
 
 button {
@@ -142,3 +143,8 @@ button {
 #blurb, form{
     margin-bottom: 5vh;
 }
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}​

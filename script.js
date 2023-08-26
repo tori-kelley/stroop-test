@@ -109,7 +109,7 @@ function endGame() {
     const endTime = new Date();
     const totalTime = Math.abs(startTime - endTime)/1000;
     const accuracy = Math.round(100*correctCount/(correctCount+ wrongCount));
-    addRecordToStorage(totalTime, username);
+    addRecordToStorage(totalTime, username, accuracy);
     playingPage.classList.add("hide");
     finishPage.classList.remove("hide");
     displayTime.textContent = `Your time is ${totalTime} seconds, and your answers were ${accuracy}% accurate! Noice.`;
@@ -124,15 +124,15 @@ function goHome() {
 
 //base code for local storage operations from Udemy shopping list project
 //https:// www.udemy.com/course/modern-javascript-from-the-beginning/learn/lecture/37192472#overview
-function addRecordToStorage(time, username) {
+function addRecordToStorage(time, username, accuracy) {
     let recordsFromStorage = getRecordsFromStorage();
 
     //add new item to array
     if (mixed) {
-        recordsFromStorage.mixed.push({"user": username, "time": time}); 
+        recordsFromStorage.mixed.push({"user": username, "time": time, "accuracy": accuracy}); 
     }
     else {
-        recordsFromStorage.matched.push({"user": username, "time": time}); 
+        recordsFromStorage.matched.push({"user": username, "time": time, "accuracy": accuracy}); 
     }
     //convert to json string and set to local storage
     localStorage.setItem('records',JSON.stringify(recordsFromStorage));
@@ -157,6 +157,7 @@ function showRecords() {
     homeScreen.classList.add("hide");
     recordsPage.classList.remove("hide");
     let recordsFromStorage = getRecordsFromStorage();
+    console.log(recordsFromStorage);
     mixedList.innerHTML = "";
     matchedList.innerHTML = "";
     addListEntries(recordsFromStorage["mixed"], mixedList);
@@ -168,7 +169,7 @@ function addListEntries (arr, parent) {
     for (let entry of sortedArr) {
         let li = document.createElement("li");
         li.classList.add(getNextColor());
-        li.appendChild(document.createTextNode(`${entry.user}: ${entry.time}`))
+        li.appendChild(document.createTextNode(`${entry.user}: ${entry.time} with ${entry.accuracy}% accuracy`));
         parent.appendChild(li);
     }
 }
@@ -190,7 +191,7 @@ function sortArr(arr) {
 }
 
 function deleteRecord(record, source) {
-    let time = record.textContent.slice(record.textContent.indexOf(":")+2);
+    let time = record.textContent.slice(record.textContent.indexOf(":") + 2, indexOf("with") - 1);
     record.remove();
     removeRecordFromStorage(time, source);
 }
