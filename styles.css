@@ -1,11 +1,3 @@
-.hide {
-    display: none;
-}
-
-div {
-    display:flex;
-}
-
 body {
     background: black;
     width: 98vw;
@@ -17,50 +9,24 @@ body {
     color: white;
 }
 
-.red {
-    color: #F00;
+div {
+    display:flex;
 }
 
-.orange {
-    color: #F80;
+ul {
+    list-style: none;
+    padding-left: 0;
 }
 
-.yellow {
-    color: #FF0;
+li {
+    list-style-type: none;
+    margin-bottom: 1vh;
 }
 
-.green {
-    color: #0F0;
-}
-
-.blue {
-    color: #08F;
-}
-
-.purple {
-    color: #808;
-}
-
-#home {
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-.nav-item {
+button {
     color: white;
-    font-size: 5vh;
-    margin: 4vw;
-    text-decoration: none;
-}
-
-#directions, #finishPage, #recordsPage, #aboutPage {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 90vw;
+    border-color: white;
+    background-color: black;
 }
 
 h3 {
@@ -125,25 +91,68 @@ https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/
     height: 8vh;
 }
 
-li {
-    list-style-type: none;
-    margin-bottom: 1vh;
+.hide {
+    display: none;
 }
 
-button {
+.nav-item {
     color: white;
-    border-color: white;
-    background-color: black;
+    font-size: 5vh;
+    margin: 4vh 4vw 4vh 4vw;
+    text-decoration: none;
 }
 
-#blurb, form{
+#directions, #finishPage, #recordsPage, #aboutPage {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+}
+
+#blurb, form {
     margin-bottom: 5vh;
     flex-direction: column;
 }
 
-ul {
-    list-style: none;
-    padding-left: 0;
+#home {
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#header {
+    font-size: 4em;
+}
+
+#psychedelic-directions {
+    flex-direction: column;
+    align-items: center;
+}
+
+.red {
+    color: #F00;
+}
+
+.orange {
+    color: #F80;
+}
+
+.yellow {
+    color: #FF0;
+}
+
+.green {
+    color: #0F0;
+}
+
+.blue {
+    color: #08F;
+}
+
+.purple {
+    color: #808;
 }
 
 .red-bg {
@@ -169,14 +178,3 @@ ul {
 .purple-bg {
     background-color: #808;
 }
-
-header {
-    height: 20vh;
-    width: 40vh;
-}
-
-#psychedelic-directions {
-    flex-direction: column;
-    align-items: center;
-}
-
